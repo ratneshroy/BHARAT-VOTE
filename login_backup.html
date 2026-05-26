@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>BharatVote | Secure Login</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@700;800;900&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "inverse-surface": "#2d3133",
+              "background": "#f8f9fb",
+              "inverse-on-surface": "#eff1f3",
+              "tertiary": "#000f00",
+              "surface-container-high": "#e6e8ea",
+              "secondary": "#8f4e00",
+              "on-surface": "#191c1e",
+              "surface-tint": "#4b53bc",
+              "error-container": "#ffdad6",
+              "on-error-container": "#93000a",
+              "secondary-fixed": "#ffdcc2",
+              "surface": "#f8f9fb",
+              "outline": "#767684",
+              "inverse-primary": "#bfc2ff",
+              "secondary-fixed-dim": "#ffb77a",
+              "on-surface-variant": "#464653",
+              "on-primary-container": "#777eea",
+              "tertiary-container": "#012900",
+              "on-secondary-fixed": "#2e1500",
+              "on-error": "#ffffff",
+              "surface-variant": "#e0e3e5",
+              "tertiary-fixed-dim": "#72de5c",
+              "on-tertiary": "#ffffff",
+              "on-secondary": "#ffffff",
+              "on-secondary-container": "#683700",
+              "surface-dim": "#d8dadc",
+              "primary-container": "#000080",
+              "on-primary": "#ffffff",
+              "on-primary-fixed": "#00006e",
+              "on-tertiary-fixed": "#012200",
+              "on-background": "#191c1e",
+              "primary-fixed-dim": "#bfc2ff",
+              "primary": "#00003c",
+              "surface-container-low": "#f2f4f6",
+              "surface-bright": "#f8f9fb",
+              "on-primary-fixed-variant": "#3239a3",
+              "error": "#ba1a1a",
+              "secondary-container": "#fe9832",
+              "primary-fixed": "#e0e0ff",
+              "surface-container-lowest": "#ffffff",
+              "on-tertiary-container": "#319e23",
+              "on-tertiary-fixed-variant": "#035300",
+              "surface-container": "#eceef0",
+              "on-secondary-fixed-variant": "#6d3a00",
+              "tertiary-fixed": "#8dfc75",
+              "outline-variant": "#c6c5d5",
+              "surface-container-highest": "#e0e3e5"
+            },
+            fontFamily: {
+              "headline": ["Public Sans"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-header {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(16px);
+        }
+        .blockchain-pattern {
+            background-image: radial-gradient(#000080 0.5px, transparent 0.5px);
+            background-size: 24px 24px;
+            opacity: 0.03;
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed">
+<header class="fixed top-0 w-full z-50 glass-header shadow-sm h-20 px-8 flex justify-between items-center max-w-full mx-auto">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">account_balance</span>
+</div>
+<h1 class="text-2xl font-black text-primary tracking-tighter font-headline">BharatVote</h1>
+</div>
+<div class="hidden md:flex items-center gap-6">
+<span class="text-sm font-medium text-on-tertiary-container bg-tertiary-fixed/30 px-3 py-1 rounded-full flex items-center gap-2">
+<span class="material-symbols-outlined text-base" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+                Secured by Blockchain
+            </span>
+</div>
+</header>
+<main class="min-h-screen pt-28 pb-12 px-6 flex flex-col items-center justify-center relative overflow-hidden">
+<div class="absolute inset-0 blockchain-pattern pointer-events-none"></div>
+<div class="absolute top-[-10%] right-[-5%] w-[400px] h-[400px] bg-primary/5 rounded-full blur-[100px] pointer-events-none"></div>
+<div class="absolute bottom-[-10%] left-[-5%] w-[400px] h-[400px] bg-secondary/5 rounded-full blur-[100px] pointer-events-none"></div>
+<div class="w-full max-w-5xl grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+<div class="lg:col-span-5 space-y-8 text-center lg:text-left">
+<div class="space-y-4">
+<h2 class="text-4xl lg:text-6xl font-black text-primary font-headline tracking-tight leading-tight">
+                        Secure <span class="text-secondary">Blockchain</span> Voting System for India.
+                    </h2>
+<p class="text-lg text-on-surface-variant max-w-md mx-auto lg:mx-0">
+                        A sovereign digital infrastructure designed for the world's largest democracy. Transparent, immutable, and fully encrypted.
+                    </p>
+</div>
+<div class="grid grid-cols-1 gap-4">
+<div class="p-6 bg-surface-container-low rounded-xl flex items-start gap-4">
+<span class="material-symbols-outlined text-primary-fixed-dim text-3xl" style="font-variation-settings: 'FILL' 1;">enhanced_encryption</span>
+<div>
+<p class="font-bold text-primary font-headline">End-to-End Encryption</p>
+<p class="text-sm text-on-surface-variant">Your vote is encrypted and stored securely on blockchain.</p>
+</div>
+</div>
+<div class="p-6 bg-surface-container-low rounded-xl flex items-start gap-4">
+<span class="material-symbols-outlined text-on-tertiary-container text-3xl" style="font-variation-settings: 'FILL' 1;">fingerprint</span>
+<div>
+<p class="font-bold text-primary font-headline">Identity Assurance</p>
+<p class="text-sm text-on-surface-variant">Multi-factor verification via Aadhaar and EPIC integration.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="lg:col-span-7 flex justify-center">
+<div class="w-full max-w-md bg-surface-container-lowest rounded-3xl p-8 lg:p-10 shadow-[0px_12px_32px_rgba(25,28,30,0.06)] border border-outline-variant/15">
+<div class="mb-8 text-center">
+<h3 id="form-title" class="text-2xl font-bold text-primary font-headline mb-2">Voter Verification</h3>
+<p id="form-subtitle" class="text-on-surface-variant text-sm">Please provide your credentials to proceed to the secure voting booth.</p>
+<div id="form-error" class="hidden mt-4 p-3 bg-error-container text-on-error-container rounded-lg text-sm font-bold border border-error/20 flex items-center justify-center gap-2">
+    <span class="material-symbols-outlined text-[18px]">error</span>
+    <span id="form-error-msg"></span>
+</div>
+</div>
+<form id="auth-form" class="space-y-6">
+<div id="section-fullname" class="space-y-1.5 hidden">
+<label class="text-xs font-semibold uppercase tracking-wider text-on-surface-variant ml-1 font-label">Full Name</label>
+<div class="flex gap-2">
+<div class="relative group flex-grow">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline group-focus-within:text-primary">person</span>
+<input id="fullname-input" class="w-full pl-12 pr-4 py-4 bg-surface-container-low border-none rounded-xl focus:ring-0 focus:bg-white transition-all border-b-2 border-transparent focus:border-primary-fixed-dim placeholder:text-outline/60" placeholder="As per Aadhaar Card" type="text"/>
+</div>
+<button id="autofill-btn" type="button" class="px-4 bg-surface-container-high hover:bg-surface-dim text-primary rounded-xl flex items-center justify-center transition-colors border border-outline-variant/30 active:scale-95" title="Autofill mock voter details">
+<span class="material-symbols-outlined text-xl">volunteer_activism</span>
+</button>
+</div>
+</div>
+<div id="section-aadhaar" class="space-y-1.5 hidden">
+<label class="text-xs font-semibold uppercase tracking-wider text-on-surface-variant ml-1 font-label">Aadhaar Number</label>
+<div class="relative group">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline group-focus-within:text-primary">fingerprint</span>
+<input id="aadhaar-input" class="w-full pl-12 pr-12 py-4 bg-surface-container-low border-none rounded-xl focus:ring-0 focus:bg-white transition-all border-b-2 border-transparent focus:border-primary-fixed-dim placeholder:text-outline/60" placeholder="XXXX XXXX 1234" type="text"/>
+</div>
+</div>
+<div id="section-dob" class="space-y-1.5 hidden">
+<label class="text-xs font-semibold uppercase tracking-wider text-on-surface-variant ml-1 font-label">Date of Birth</label>
+<div class="relative group">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline group-focus-within:text-primary">calendar_month</span>
+<input id="dob-input" class="w-full pl-12 pr-4 py-4 bg-surface-container-low border-none rounded-xl focus:ring-0 focus:bg-white transition-all border-b-2 border-transparent focus:border-primary-fixed-dim placeholder:text-outline/60 text-outline" type="date"/>
+</div>
+</div>
+<div id="section-voterid" class="space-y-1.5">
+<label class="text-xs font-semibold uppercase tracking-wider text-on-surface-variant ml-1 font-label">Voter ID / EPIC Number</label>
+<div class="relative group">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline group-focus-within:text-primary">badge</span>
+<input id="voter-id-input" class="w-full pl-12 pr-4 py-4 bg-surface-container-low border-none rounded-xl focus:ring-0 focus:bg-white transition-all border-b-2 border-transparent focus:border-primary-fixed-dim placeholder:text-outline/60 uppercase" placeholder="ABC1234567" type="text"/>
+</div>
+</div>
+<div id="section-mobile" class="space-y-1.5">
+<label class="text-xs font-semibold uppercase tracking-wider text-on-surface-variant ml-1 font-label">Mobile Number</label>
+<div class="relative group">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline group-focus-within:text-primary">smartphone</span>
+<div class="absolute left-12 top-1/2 -translate-y-1/2 text-on-surface-variant font-medium text-sm">+91</div>
+<input id="mobile-input" class="w-full pl-20 pr-4 py-4 bg-surface-container-low border-none rounded-xl focus:ring-0 focus:bg-white transition-all border-b-2 border-transparent focus:border-primary-fixed-dim placeholder:text-outline/60" placeholder="00000 00000" type="tel"/>
+</div>
+</div>
+<div class="pt-4 space-y-4">
+<button id="primary-btn" class="w-full py-4 bg-gradient-to-r from-primary to-primary-container text-white rounded-xl font-headline font-bold text-lg shadow-md active:scale-[0.98] transition-all flex items-center justify-center gap-2" type="button">
+<span id="primary-btn-text">Login / Verify</span>
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<div class="flex items-center gap-4 py-2">
+<div class="flex-1 h-[1px] bg-outline-variant/30"></div>
+<span class="text-xs font-bold text-outline uppercase tracking-widest">or</span>
+<div class="flex-1 h-[1px] bg-outline-variant/30"></div>
+</div>
+<div id="login-actions" class="grid grid-cols-2 gap-4">
+<button class="py-3 bg-surface-container-high text-on-surface font-semibold rounded-xl text-sm transition-colors hover:bg-surface-dim flex items-center justify-center gap-2" type="button">
+<span class="material-symbols-outlined text-lg">sms</span>
+                                    OTP verification
+                                </button>
+<button id="switch-to-register" class="py-3 bg-surface-container-high text-on-surface font-semibold rounded-xl text-sm transition-colors hover:bg-surface-dim flex items-center justify-center gap-2" type="button">
+<span class="material-symbols-outlined text-lg">how_to_reg</span>
+                                    Register
+                                </button>
+</div>
+<div id="register-actions" class="hidden grid grid-cols-1 gap-4">
+<button id="switch-to-login" class="py-3 bg-surface-container-high text-on-surface font-semibold rounded-xl text-sm transition-colors hover:bg-surface-dim flex items-center justify-center gap-2" type="button">
+<span class="material-symbols-outlined text-lg">login</span>
+                                    Already registered? Login
+                                </button>
+</div>
+</div>
+</form>
+<div class="mt-8 p-4 bg-secondary-container/10 border border-secondary-container/20 rounded-xl flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">lock</span>
+<p class="text-[11px] leading-tight text-on-secondary-container font-medium">
+                            Security Protocol 2.4 Active: All data transmission is secured by military-grade AES-256 encryption.
+                        </p>
+</div>
+</div>
+</div>
+</div>
+
+</main>
+<footer class="bg-slate-50 border-t border-slate-200/50 py-12 px-8">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="text-center md:text-left">
+<p class="font-['Public_Sans'] font-bold text-blue-900 mb-2">BharatVote</p>
+<p class="font-['Inter'] text-sm leading-relaxed text-slate-600 max-w-md">
+                    Election Commission Inspired Demo UI. Your vote is encrypted and stored securely on blockchain.
+                </p>
+</div>
+<div class="flex flex-wrap justify-center gap-8">
+<a class="text-slate-500 hover:text-blue-600 hover:underline decoration-orange-500/50 underline-offset-4 text-sm transition-opacity" href="#">Security Protocol</a>
+<a class="text-slate-500 hover:text-blue-600 hover:underline decoration-orange-500/50 underline-offset-4 text-sm transition-opacity" href="#">Verification</a>
+<a class="text-slate-500 hover:text-blue-600 hover:underline decoration-orange-500/50 underline-offset-4 text-sm transition-opacity" href="#">Help Desk</a>
+</div>
+</div>
+<div class="mt-12 pt-8 border-t border-slate-200/50 text-center">
+<span class="text-[10px] text-slate-400 uppercase tracking-widest font-bold">Official Government of India Digital Initiative Concept</span>
+</div>
+</footer>
+<script>
+    const loginActions = document.getElementById('login-actions');
+    const registerActions = document.getElementById('register-actions');
+    const sectionFullname = document.getElementById('section-fullname');
+    const sectionVoterid = document.getElementById('section-voterid');
+    const sectionAadhaar = document.getElementById('section-aadhaar');
+    const sectionDob = document.getElementById('section-dob');
+    const formTitle = document.getElementById('form-title');
+    const formSubtitle = document.getElementById('form-subtitle');
+    const formError = document.getElementById('form-error');
+    const formErrorMsg = document.getElementById('form-error-msg');
+    let isRegisterMode = false;
+
+    function showError(message) {
+        formErrorMsg.innerText = message;
+        formError.classList.remove('hidden');
+    }
+
+    function hideError() {
+        formError.classList.add('hidden');
+    }
+
+    document.getElementById('switch-to-register').addEventListener('click', () => {
+        isRegisterMode = true;
+        loginActions.classList.add('hidden');
+        registerActions.classList.remove('hidden');
+        
+        sectionFullname.classList.remove('hidden');
+        sectionAadhaar.classList.remove('hidden');
+        sectionDob.classList.remove('hidden');
+        sectionVoterid.classList.add('hidden');
+        
+        document.getElementById('primary-btn-text').innerText = 'Register';
+        formTitle.innerText = 'Voter Registration';
+        formSubtitle.innerText = 'Please provide your details to securely register on the blockchain.';
+    });
+
+    document.getElementById('switch-to-login').addEventListener('click', () => {
+        isRegisterMode = false;
+        registerActions.classList.add('hidden');
+        loginActions.classList.remove('hidden');
+        
+        sectionFullname.classList.add('hidden');
+        sectionAadhaar.classList.add('hidden');
+        sectionDob.classList.add('hidden');
+        sectionVoterid.classList.remove('hidden');
+        
+        document.getElementById('primary-btn-text').innerText = 'Login / Verify';
+        formTitle.innerText = 'Voter Verification';
+        formSubtitle.innerText = 'Please provide your credentials to proceed to the secure voting booth.';
+    });
+
+    document.getElementById('autofill-btn').addEventListener('click', () => {
+        const randomMobile = '987' + Math.floor(1000000 + Math.random() * 9000000);
+        const randomAadhaar = '5678' + Math.floor(10000000 + Math.random() * 90000000);
+        const randomDob = '199' + Math.floor(0 + Math.random() * 9) + '-' + 
+                            String(Math.floor(1 + Math.random() * 12)).padStart(2, '0') + '-' + 
+                            String(Math.floor(1 + Math.random() * 28)).padStart(2, '0');
+        
+        const fullnameInput = document.getElementById('fullname-input');
+        if (!fullnameInput.value) {
+            const firstNames = ['Arjun', 'Aanya', 'Rahul', 'Priya', 'Amit', 'Neha', 'Rohan', 'Anjali', 'Vikram', 'Divya'];
+            const lastNames = ['Sharma', 'Verma', 'Kumar', 'Singh', 'Patel', 'Joshi', 'Gupta', 'Reddy', 'Mehta', 'Nair'];
+            const randomName = firstNames[Math.floor(Math.random() * firstNames.length)] + ' ' + 
+                               lastNames[Math.floor(Math.random() * lastNames.length)];
+            fullnameInput.value = randomName;
+        }
+
+        document.getElementById('aadhaar-input').value = randomAadhaar;
+        document.getElementById('mobile-input').value = randomMobile;
+        document.getElementById('dob-input').value = randomDob;
+    });
+
+    document.getElementById('primary-btn').addEventListener('click', async () => {
+        hideError();
+        const primaryBtn = document.getElementById('primary-btn');
+        const originalHtml = primaryBtn.innerHTML;
+        primaryBtn.innerHTML = '<span class="material-symbols-outlined animate-spin text-lg">sync</span> Processing...';
+
+        try {
+            if (isRegisterMode) {
+                const fullname = document.getElementById('fullname-input').value;
+                const aadhaar = document.getElementById('aadhaar-input').value;
+                const dob = document.getElementById('dob-input').value;
+                const mobile = document.getElementById('mobile-input').value;
+
+                if (!fullname || !aadhaar || !dob || !mobile) {
+                    showError('Please fill out all fields for registration.');
+                    primaryBtn.innerHTML = originalHtml;
+                    return;
+                }
+
+                const response = await fetch('/api/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name: fullname, aadhaar, dob, mobile })
+                });
+
+                const data = await response.json();
+                
+                if (data.success) {
+                    showVoterCardAndDownload(data.name, data.mobile, data.voterId, data.transactionHash);
+                } else {
+                    showError('Registration failed: ' + data.message);
+                }
+                primaryBtn.innerHTML = originalHtml;
+            } else {
+                const response = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        voterId: document.getElementById('voter-id-input').value || 'ABC1234567',
+                        mobile: document.getElementById('mobile-input').value
+                    })
+                });
+
+                const data = await response.json();
+                
+                if (data.success) {
+                    window.location.replace(data.redirectUrl);
+                } else {
+                    showError(data.message || 'Login failed');
+                    primaryBtn.innerHTML = originalHtml;
+                }
+            }
+        } catch (error) {
+            console.error('Error logging in:', error);
+            showError('Server error. Please ensure server.js is running.');
+            primaryBtn.innerHTML = originalHtml;
+        }
+    });
+
+    function showVoterCardAndDownload(name, mobile, voterId, transactionHash) {
+        const cardHtml = `
+            <div id="voter-card-pdf" style="padding: 24px; background: white; border: 4px solid #00003c; border-radius: 16px; width: 450px; max-width: 90vw; margin: 0 auto; color: #191c1e; font-family: 'Public Sans', sans-serif; position: relative; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.2);">
+                <div style="position: absolute; top: 0; left: 0; right: 0; height: 10px; background: #fe9832;"></div>
+                <div style="text-align: center; border-bottom: 2px dashed #e0e3e5; padding-bottom: 12px; margin-bottom: 20px; padding-top: 10px;">
+                    <div style="display: flex; justify-content: center; align-items: center; gap: 8px; margin-bottom: 4px;">
+                        <span class="material-symbols-outlined" style="color: #00003c; font-size: 28px;">account_balance</span>
+                        <h2 style="margin: 0; color: #00003c; font-size: 26px; font-weight: 800;">BharatVote</h2>
+                    </div>
+                    <p style="margin: 0; font-size: 14px; font-weight: 600; color: #4b53bc; text-transform: uppercase; letter-spacing: 1px;">Elector's Photo Identity Card</p>
+                </div>
+                
+                <div style="display: flex; flex-direction: column; gap: 16px;">
+                    <div>
+                        <p style="margin: 0; font-size: 12px; color: #767684; font-weight: 600; text-transform: uppercase;">Elector's Name</p>
+                        <p style="margin: 4px 0 0; font-size: 20px; font-weight: 700;">${name}</p>
+                    </div>
+                    
+                    <div style="background: #f8f9fb; padding: 12px; border-radius: 8px; border: 1px solid #e0e3e5;">
+                        <p style="margin: 0; font-size: 12px; color: #767684; font-weight: 600; text-transform: uppercase;">Voter ID / EPIC Number</p>
+                        <p style="margin: 4px 0 0; font-size: 24px; font-weight: 800; color: #00003c; letter-spacing: 2px;">${voterId}</p>
+                    </div>
+                    
+                    <div>
+                        <p style="margin: 0; font-size: 12px; color: #767684; font-weight: 600; text-transform: uppercase;">Mobile Registered</p>
+                        <p style="margin: 4px 0 0; font-size: 16px; font-weight: 600;">+91 ${mobile}</p>
+                    </div>
+                    
+                    <div>
+                        <p style="margin: 0; font-size: 12px; color: #767684; font-weight: 600; text-transform: uppercase;">Transaction Hash</p>
+                        <p style="margin: 4px 0 0; font-size: 11px; font-family: monospace; word-break: break-all; color: #4b53bc; font-weight: 600;">${transactionHash}</p>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 24px; padding-top: 16px; border-top: 1px solid #e0e3e5;">
+                    <div style="display: flex; justify-content: center; align-items: center; gap: 6px;">
+                        <span class="material-symbols-outlined" style="color: #319e23; font-size: 16px;">verified</span>
+                        <p style="margin: 0; font-size: 11px; font-weight: 600; color: #319e23;">Digitally stored on Blockchain</p>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 24px; display: flex; justify-content: center; gap: 12px; font-family: 'Inter', sans-serif;">
+                <button id="download-pdf-btn" style="background: #00003c; cursor: pointer; color: white; padding: 12px 24px; border: none; border-radius: 12px; font-weight: 600; font-size: 15px; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 12px rgba(0,0,60,0.2); transition: all 0.2s;">
+                    <span class="material-symbols-outlined">download</span> Download PDF
+                </button>
+                <button id="close-card-btn" style="background: white; border: 1px solid #c6c5d5; cursor: pointer; color: #191c1e; padding: 12px 24px; border-radius: 12px; font-weight: 600; font-size: 15px; transition: all 0.2s;">
+                    Proceed to Login
+                </button>
+            </div>
+        `;
+
+        const overlay = document.createElement('div');
+        overlay.id = 'voter-card-overlay';
+        overlay.style.position = 'fixed';
+        overlay.style.top = '0';
+        overlay.style.left = '0';
+        overlay.style.width = '100vw';
+        overlay.style.height = '100vh';
+        overlay.style.backgroundColor = 'rgba(25, 28, 30, 0.85)';
+        overlay.style.backdropFilter = 'blur(4px)';
+        overlay.style.zIndex = '99999';
+        overlay.style.display = 'flex';
+        overlay.style.alignItems = 'center';
+        overlay.style.justifyContent = 'center';
+        overlay.style.flexDirection = 'column';
+        
+        overlay.innerHTML = cardHtml;
+        document.body.appendChild(overlay);
+
+        document.getElementById('download-pdf-btn').addEventListener('click', () => {
+            const element = document.getElementById('voter-card-pdf');
+            const opt = {
+                margin: 0.5,
+                filename: 'BharatVote_Card_' + voterId + '.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+            html2pdf().from(element).set(opt).save();
+        });
+
+        document.getElementById('close-card-btn').addEventListener('click', () => {
+            document.body.removeChild(overlay);
+            document.getElementById('switch-to-login').click();
+            document.getElementById('voter-id-input').value = voterId;
+            document.getElementById('mobile-input').value = mobile;
+        });
+    }
+</script>
+</body></html>

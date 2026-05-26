@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BharatVote | Admin Panel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@700;800;900&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.13.0/ethers.umd.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8f9fb;
+        }
+
+        h1,
+        h2,
+        h3,
+        .font-headline {
+            font-family: 'Public Sans', sans-serif;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%) translateY(10px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0) translateY(0);
+                opacity: 1;
+            }
+        }
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+            }
+        }
+        .toast-enter {
+            animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .toast-exit {
+            animation: fadeOut 0.3s ease-out forwards;
+        }
+    </style>
+</head>
+
+<body class="text-slate-900 p-8 min-h-screen">
+    <div class="max-w-6xl mx-auto space-y-8">
+        <header
+            class="flex flex-col md:flex-row justify-between items-start md:items-center bg-white p-6 rounded-2xl shadow-sm border border-slate-200 gap-4">
+            <div>
+                <h1 class="text-3xl font-black text-blue-900 font-headline">BharatVote Admin Console</h1>
+                <p class="text-slate-500 font-medium text-sm mt-1">Manage elections on the secure local blockchain</p>
+            </div>
+            <div id="status"
+                class="flex items-center gap-2 bg-slate-100 px-4 py-2 rounded-full font-bold text-sm text-slate-500 cursor-wait">
+                <span class="material-symbols-outlined animate-spin shadow-none">sync</span> Connecting to GANACHE...
+            </div>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
+                <div class="flex items-center gap-2 text-blue-900 mb-4">
+                    <span id="autofill-cand-icon" class="material-symbols-outlined cursor-pointer hover:text-blue-700 transition-colors" title="Autofill mock candidate details">person_add</span>
+                    <h2 class="font-bold text-lg font-headline">Add Candidate</h2>
+                </div>
+                <input id="cand-id" placeholder="Candidate ID (e.g. C1)"
+                    class="w-full bg-slate-50 border border-slate-200 rounded-lg p-3 outline-none focus:ring-2 focus:ring-blue-500 transition">
+                <input id="cand-name" placeholder="Candidate Name"
+                    class="w-full bg-slate-50 border border-slate-200 rounded-lg p-3 outline-none focus:ring-2 focus:ring-blue-500 transition">
+                <input id="cand-party" placeholder="Political Party"
+                    class="w-full bg-slate-50 border border-slate-200 rounded-lg p-3 outline-none focus:ring-2 focus:ring-blue-500 transition">
+                <button id="add-cand-btn" onclick="addCandidate()"
+                    class="w-full bg-blue-900 text-white font-bold py-3 rounded-lg hover:bg-blue-800 transition active:scale-95 shadow-md flex items-center justify-center gap-2">Add
+                    to Ballot</button>
+            </div>
+
+            <div class="space-y-6">
+                <div class="bg-slate-800 border border-slate-700 rounded-2xl p-6 font-mono text-xs text-white shadow-md leading-relaxed">
+                    <div class="space-y-2">
+                        <p class="text-white font-bold">LEDGER STATUS OVERVIEW:</p>
+                        <p class="text-slate-400">--------------------------------------</p>
+                        <div class="flex justify-between">
+                            <span>REGISTERED ELECTORS:</span>
+                            <span id="voter-count-display" class="font-bold text-white">...</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>TOTAL BALLOTS CAST:</span>
+                            <span id="vote-count-display" class="font-bold text-white">...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
+                    <div class="flex items-center gap-2 text-blue-900 mb-4">
+                        <span class="material-symbols-outlined">build</span>
+                        <h2 class="font-bold text-lg font-headline">Quick Tools</h2>
+                    </div>
+                    <div class="grid grid-cols-1 gap-3">
+                        <button id="create-mock-voter-btn" class="w-full bg-slate-50 hover:bg-slate-100 text-slate-800 font-bold py-3 px-4 rounded-lg transition active:scale-95 flex items-center justify-center gap-2 border border-slate-200/60 text-sm">
+                            <span class="material-symbols-outlined text-sm">person_add_alt</span>
+                            Create Mock Voter
+                        </button>
+                        <button id="simulate-voting-btn" class="w-full bg-blue-900 hover:bg-blue-800 text-white font-bold py-3 px-4 rounded-lg transition active:scale-95 flex items-center justify-center gap-2 text-sm">
+                            <span class="material-symbols-outlined text-sm">play_circle</span>
+                            Simulate Voting
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex flex-col">
+                <div class="mb-6">
+                    <div class="flex items-center gap-2 text-red-700 mb-4">
+                        <span class="material-symbols-outlined">settings_power</span>
+                        <h2 class="font-bold text-lg font-headline">Election Lifecycle</h2>
+                    </div>
+                    <button id="lifecycle-btn" onclick="toggleElection()"
+                        class="w-full text-white font-bold py-3 rounded-lg transition active:scale-95 shadow-md flex items-center justify-center gap-2 bg-slate-400">
+                        <span class="material-symbols-outlined animate-spin text-sm shadow-none">sync</span> Loading...
+                    </button>
+                </div>
+
+                <hr class="border-slate-100 mb-6">
+
+                <div class="flex-grow flex flex-col">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="font-bold text-lg font-headline text-slate-700">Live Voting</h2>
+                        <button onclick="loadCandidates()"
+                            class="text-blue-600 text-sm font-bold hover:underline">Refresh</button>
+                    </div>
+                    <div id="candidates-list"
+                        class="space-y-2 text-sm flex-grow bg-slate-50 border border-slate-100 rounded-xl p-4 overflow-y-auto max-h-48">
+                        <p class="text-slate-400 italic text-center mt-4">Empty. Click refresh to load.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+
+    <div id="toast-container" class="fixed bottom-6 right-6 z-50 space-y-3 pointer-events-none"></div>
+</body>
+
+</html>

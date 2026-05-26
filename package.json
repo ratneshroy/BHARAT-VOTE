@@ -1,0 +1,23 @@
+{
+  "name": "bharat-vote",
+  "version": "1.0.0",
+  "description": "Secure Blockchain Voting System Demo",
+  "main": "server.js",
+  "scripts": {
+    "dev": "concurrently \"npm run start\" \"npm run admin\"",
+    "start": "node server.js",
+    "admin": "node admin-server.js",
+    "resetdb": "node resetdb.js"
+  },
+  "dependencies": {
+    "body-parser": "^2.2.2",
+    "dotenv": "^17.4.0",
+    "ethers": "^6.16.0",
+    "express": "^4.22.1",
+    "mongoose": "^8.24.0",
+    "solc": "^0.8.17"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
