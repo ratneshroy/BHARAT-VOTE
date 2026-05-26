@@ -6,8 +6,7 @@
   "scripts": {
     "dev": "concurrently \"npm run start\" \"npm run admin\"",
     "start": "node server.js",
-    "admin": "node admin-server.js",
-    "resetdb": "node resetdb.js"
+    "admin": "node admin-server.js"
   },
   "dependencies": {
     "body-parser": "^2.2.2",

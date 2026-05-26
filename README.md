@@ -37,12 +37,6 @@ Make sure you have the following installed on your machine:
     ```
     Copy the deployed contract address output from this command and update `CONTRACT_ADDRESS` in your `.env` file.
 
-4.  **Reset/Initialize Database (Optional)**
-    To clear out any previous voter registration records and vote logs:
-    ```bash
-    npm run resetdb
-    ```
-
 ## Running the Application
 
 You can start both the voter portal and the admin console concurrently using:
